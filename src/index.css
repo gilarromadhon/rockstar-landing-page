@@ -74,8 +74,13 @@ a { color: inherit; text-decoration: none; }
   font-size: 13.5px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  padding: 15px 30px 15px 46px;
-  border-radius: 16px;
+  /* Fixed height (matching .burger's 48px) rather than relying on
+     padding + line-height, so the trial button and the menu/close button
+     line up exactly instead of being "close enough". */
+  height: 48px;
+  box-sizing: border-box;
+  padding: 0 30px 0 46px;
+  border-radius: 8px;
   border: none;
   white-space: nowrap;
   -webkit-mask:
@@ -219,7 +224,7 @@ a { color: inherit; text-decoration: none; }
 .menu-panel__links a {
   position: relative;
   isolation: isolate;
-  font-size: clamp(14px, 2.6vw, 30px);
+  font-size: clamp(24px, 2.6vw, 30px);
   font-weight: 800;
   color: rgba(255,255,255,0.88);
   line-height: 1.1;
@@ -291,9 +296,11 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 560px) {
   /* Shrink the ticket button but keep the left padding big enough for
      the dashed divider (at a proportionally closer offset) so it doesn't
-     collide with the label text. */
+     collide with the label text. Height is pinned to match .burger's
+     mobile size (42px) exactly. */
   .btn-trial {
-    padding: 12px 20px 12px 36px;
+    height: 42px;
+    padding: 0 20px 0 36px;
     font-size: 11.5px;
     letter-spacing: 0.02em;
   }
@@ -328,7 +335,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__text h1 {
-  font-size: clamp(30px, 4.6vw, 54px);
+  font-size: clamp(18px, 4.6vw, 54px);
   line-height: 1.18;
   font-weight: 800;
   margin: 0;
@@ -336,7 +343,7 @@ a { color: inherit; text-decoration: none; }
   /* Hard cap at 3 lines regardless of viewport width. */
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   overflow: hidden;
 }
 
@@ -556,10 +563,7 @@ a { color: inherit; text-decoration: none; }
 
 .events__grid {
   display: grid;
-  /* Title/progress column stays compact (like a header, not a full card
-     column) so the two card columns get most of the width, matching the
-     reference's proportions. */
-  grid-template-columns: minmax(240px, 300px) 1.3fr 1.3fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 48px;
   align-items: start;
 }
@@ -632,12 +636,33 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
 }
-.event-card__media img {
-  width: 100%;
-  border-radius: 20px;
-  aspect-ratio: 4/3;
-  object-fit: cover;
+.event-card__media {
+  position: relative;
   margin-bottom: 18px;
+  overflow: hidden;
+}
+.event-card__media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.event-card:hover .event-card__media img {
+  transform: scale(1.04);
+}
+.event-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 33, 31, 0.28);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.event-card:hover .event-card__overlay {
+  opacity: 1;
 }
 .event-card__tag {
   color: var(--orange-deep);
@@ -646,22 +671,29 @@ a { color: inherit; text-decoration: none; }
   margin: 0 0 8px;
 }
 .event-card h3 {
-  font-size: clamp(19px, 1.6vw, 23px);
-  margin: 0 0 10px;
+  font-size: clamp(14px, 1.6vw, 23px);
+  margin: 0;
   color: var(--ink);
-}
-.event-card__copy {
-  color: var(--ink-soft);
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 0 0 18px;
 }
 
 @media (max-width: 900px) {
-  .events__grid { grid-template-columns: 1fr; }
-  .events__panel { position: relative; top: 0; }
-  .events__col--c { margin-top: 0; }
-  .events__col { gap: 48px; }
+  /* Title/description spans full width as a header row; the two card
+     columns sit side by side below it (2 columns, not a single stack),
+     and the progress strips are dropped since the panel is no longer
+     pinned to track against on mobile. */
+  .events__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .events__panel {
+    position: relative;
+    top: 0;
+    grid-column: 1 / -1;
+  }
+  .events__progress {
+    display: none;
+  }
+  .events__col--c { margin-top: 250px; }
+  .events__col { gap: 150px; }
   .events { padding: 56px 0; }
 }
 
@@ -704,7 +736,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 800;
   color: var(--orange-deep);
   line-height: 1;
-  min-width: 90px;
+  /* min-width: 90px; */
 }
 .stats__label {
   font-size: clamp(18px, 2.4vw, 26px);
@@ -915,7 +947,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 480px) {
-  .footer__grid { grid-template-columns: 1fr; }
+  /* Stays 2 columns on mobile (per spec) rather than collapsing to 1. */
+  .footer__grid { grid-template-columns: 1fr 1fr; }
   .footer__champions { grid-column: 1; }
 }
 
@@ -1021,4 +1054,25 @@ a { color: inherit; text-decoration: none; }
 .loader__img.is-active {
   opacity: 1;
   transform: scale(1);
+}
+
+@media (max-width: 480px) {
+  .btn-pill {
+    --h: 42px;
+  }
+
+  .btn-pill__label {
+    height: var(--h);
+    font-weight: 800;
+    font-size: 12px;
+  }
+
+  .btn-pill__icon {
+    width: calc(var(--h) * 1);
+    height: calc(var(--h) * 1);
+  }
+
+  .label__hide {
+    display: none;
+  }
 }

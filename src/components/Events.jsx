@@ -31,11 +31,12 @@ function EventCard({ event }) {
           src={`https://picsum.photos/seed/${event.img}/640/480`}
           alt={event.title}
         />
+        <div className="event-card__overlay">
+          <PillButton label="Perform like a pro" events={true} />
+        </div>
       </div>
       <p className="event-card__tag">{event.tag}</p>
       <h3>{event.title}</h3>
-      <p className="event-card__copy">{event.copy}</p>
-      <PillButton label="Perform like a pro" />
     </div>
   );
 }
