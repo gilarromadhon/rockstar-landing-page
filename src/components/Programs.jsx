@@ -5,42 +5,42 @@ const PROGRAMS = [
   {
     name: "Gymnastic",
     desc: "Flexibility, strength and balance taught through floor, bar and vault fundamentals.",
-    img: "gymnastic-rsa",
+    img: "gymnastic",
   },
   {
     name: "Futsal",
     desc: "Fast-paced small-sided football that sharpens ball control and teamwork.",
-    img: "futsal-rsa",
+    img: "futsal",
   },
   {
     name: "Tennis",
     desc: "Footwork, swing mechanics and match-play for every age and level.",
-    img: "tennis-rsa",
+    img: "tennis",
   },
   {
     name: "Pickleball",
     desc: "The fastest-growing racquet sport, built for coordination and quick reflexes.",
-    img: "pickleball-rsa",
+    img: "pickleball",
   },
   {
     name: "Basketball",
     desc: "Dribbling, shooting and team play led by certified youth coaches.",
-    img: "basketball-rsa",
+    img: "basketball",
   },
   {
     name: "Taekwondo",
     desc: "Discipline, focus and self-defense through a structured belt curriculum.",
-    img: "taekwondo-rsa",
+    img: "taekwondo",
   },
   {
     name: "Swimming",
     desc: "Water confidence and stroke technique in a safe, supervised pool.",
-    img: "swimming-rsa",
+    img: "swimming",
   },
   {
     name: "Dance",
     desc: "Rhythm, performance and stage confidence across multiple dance styles.",
-    img: "dance-rsa",
+    img: "dance",
   },
 ];
 
@@ -127,7 +127,7 @@ export default function Programs() {
           {PROGRAMS.map((p) => (
             <article className="program-card" key={p.name}>
               <img
-                src={`https://picsum.photos/seed/${p.img}/480/640`}
+                src={`https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/${p.img}.jpeg`}
                 alt={`${p.name} class at Rockstar Academy`}
               />
               <div className="program-card__label">{p.name}</div>
