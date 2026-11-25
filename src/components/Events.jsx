@@ -32,7 +32,7 @@ function EventCard({ event }) {
           alt={event.title}
         />
         <div className="event-card__overlay">
-          <PillButton label="Perform like a pro" events={true} />
+          <PillButton label="Perform like a pro" />
         </div>
       </div>
       <p className="event-card__tag">{event.tag}</p>

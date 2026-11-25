@@ -1,7 +1,7 @@
-export default function PillButton({ label, onClick, events }) {
+export default function PillButton({ label, onClick }) {
   return (
     <button className="btn-pill" onClick={onClick}>
-      <span className={events ? "btn-pill__label label__hide" : "btn-pill__label"}>{label}</span>
+      <span className="btn-pill__label">{label}</span>
       <span className="btn-pill__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
           <line x1="4" y1="12" x2="19" y2="12" />
