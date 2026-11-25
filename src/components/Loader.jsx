@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 const SLIDES = [
-  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/logo.png",
-  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/hero.jpg",
-  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/instructor.png",
-  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/champions.png",
-  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/rockstar.png",
+  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/futsal.jpeg",
+  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/dance.jpeg",
+  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/basketball.jpeg",
+  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/gymnastic.jpeg",
+  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/swimming.jpeg",
 ];
 
 const STEP_MS = 320;

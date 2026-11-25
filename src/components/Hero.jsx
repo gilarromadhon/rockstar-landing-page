@@ -44,8 +44,8 @@ export default function Hero() {
           <h1>
             Welcome to the <span className="accent-orange">biggest one</span> stop
             physical education Academy
-            <br />
-            for kids &amp; teens in{" "}
+            <br className="hero__linebreak" />
+            {" for kids & teens in "}
             <span className="accent-teal">Asia</span>!
           </h1>
         </div>

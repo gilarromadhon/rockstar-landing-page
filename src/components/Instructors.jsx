@@ -3,7 +3,7 @@ import { gsap, ScrollTrigger } from "../lib/smoothScroll";
 import PillButton from "./PillButton";
 
 const INSTRUCTOR_IMG =
-  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/instructor.png";
+  "https://cghpdqioexwedswxjqvs.supabase.co/storage/v1/object/public/images/rockstar/coach.jpeg";
 
 export default function Instructors() {
   const sectionRef = useRef(null);
