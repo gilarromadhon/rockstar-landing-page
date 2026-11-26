@@ -8,35 +8,47 @@ export default function FindUs() {
   const cityRefs = useRef([]);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const items = cityRefs.current.filter(Boolean);
+    // Pin + focus-cycling only on wider screens. Pinning a full-viewport
+    // section on mobile is exactly the kind of thing that goes wrong
+    // when the browser's address bar resizes the viewport mid-scroll
+    // (the pin-spacer height can end up stale) — which is what was
+    // letting the Instructors heading right after this section peek out
+    // from under it. On mobile the cities just render as a normal static
+    // list instead (see the CSS fallback for .find-us__city).
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 769px)", () => {
+      const ctx = gsap.context(() => {
+        const items = cityRefs.current.filter(Boolean);
 
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: `+=${CITIES.length * 50}%`,
-        pin: true,
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const idx = Math.min(
-            CITIES.length - 1,
-            Math.floor(self.progress * CITIES.length)
-          );
-          items.forEach((el, i) => {
-            const isFocus = i === idx;
-            el.classList.toggle("is-focus", isFocus);
-            gsap.to(el, {
-              opacity: isFocus ? 1 : 0.22,
-              scale: isFocus ? 1 : 0.94,
-              duration: 0.35,
-              overwrite: "auto",
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top top",
+          end: `+=${CITIES.length * 50}%`,
+          pin: true,
+          scrub: 0.5,
+          onUpdate: (self) => {
+            const idx = Math.min(
+              CITIES.length - 1,
+              Math.floor(self.progress * CITIES.length)
+            );
+            items.forEach((el, i) => {
+              const isFocus = i === idx;
+              el.classList.toggle("is-focus", isFocus);
+              gsap.to(el, {
+                opacity: isFocus ? 1 : 0.22,
+                scale: isFocus ? 1 : 0.94,
+                duration: 0.35,
+                overwrite: "auto",
+              });
             });
-          });
-        },
-      });
-    }, sectionRef);
+          },
+        });
+      }, sectionRef);
 
-    return () => ctx.revert();
+      return () => ctx.revert();
+    });
+
+    return () => mm.revert();
   }, []);
 
   const goToCity = () => {
